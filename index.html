@@ -43,7 +43,7 @@
     <div class="container">
       <div class="row-body">
         <div class="col-full">
-          <h2><span id="season">Spring </span><span id="year">2023 </span>Anime</h2>
+          <h2 class="no-margin-top"><span id="season">Spring </span><span id="year">2023 </span>Anime</h2>
         </div>
       </div>
       <div data-view="anime-list">
@@ -156,6 +156,78 @@
       </div>
     </div>
   </main>
+  <div id="info-modal" class="centered fixed overlay hidden">
+    <div class="container flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <i class="fa-solid fa-square-xmark align-right info-exit"></i>
+          <div class="modal-row">
+            <div class="col-img">
+              <img class="entry-img" src="images/konosuba.png">
+            </div>
+            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+          </div>
+          <div class="modal-row">
+            <p>Synopsis:<br>
+              <span>Crimson Magic Clan members Megumin and Yunyun are at the top of their class, but they still have a lot to learn.
+              Yunyun's begun learning advanced magic, but Megumin has gone down a different path-the path of explosion magic! Despite
+              being warned of its limited usefulness, Megumin believes explosion magic is the way for her to become a great,
+              voluptuous wizard, and she won't be convinced otherwise!
+
+              (Source: Yen Press)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="play-modal" class="centered fixed overlay hidden">
+    <div class="container flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <div class="modal-row">
+            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+          </div>
+          <div class="modal-row">
+            <p class="no-margin-top">Link to YouTube trailer?</p>
+          </div>
+          <div class="modal-buttons">
+            <i class="fa-solid fa-square-check play-confirm"></i>
+            <i class="fa-solid fa-square-xmark play-exit"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="bookmark-modal" class="centered fixed overlay hidden">
+    <div class="container flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <div class="modal-row">
+            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+          </div>
+          <div class="modal-row">
+            <p class="no-margin-top">Bookmark this anime?</p>
+          </div>
+          <div class="modal-buttons">
+            <i class="fa-solid fa-square-check bookmark-confirm"></i>
+            <i class="fa-solid fa-square-xmark bookmark-exit"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div id="bookmark-modal" class="centered fixed overlay hidden">
+    <div class="modal-layout">
+      <div class="modal-row">
+        <h3>Are you sure you want to delete this entry?</h3>
+      </div>
+      <div class="modal-row modal-input">
+        <button type="button" class="no-button">CANCEL</button>
+        <button type="button" id="bookmark-check">CONFIRM</button>
+      </div>
+    </div>
+  </div> -->
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
