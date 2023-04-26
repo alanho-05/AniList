@@ -19,6 +19,16 @@
   background-color: #d9d9d9;
 }
 
+.entry-bg {
+  background-color: #3f72af;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
 h1 {
   font-weight: 700;
 }
@@ -33,7 +43,7 @@ select:hover {
 }
 
 i {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 i:hover {
@@ -47,4 +57,19 @@ h2 {
 
 p {
   font-family: Roboto, sans-serif;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+img {
+  width: 93px;
+  height: 132px;
+}
+
+h4 {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
 }
