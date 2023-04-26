@@ -33,6 +33,10 @@ h1 {
   font-weight: 700;
 }
 
+li {
+  margin-bottom: 1rem;
+}
+
 select {
   font-family: "Work Sans", sans-serif;
   border: none;
