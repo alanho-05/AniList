@@ -1,0 +1,50 @@
+.align-right {
+  margin-left: auto;
+}
+
+.margin-left {
+  margin-left: 1rem;
+}
+
+.white-font {
+  color: white;
+}
+
+.nav-bg {
+  background-color: #112d4e;
+}
+
+.grey-bg {
+  min-height: 100vh;
+  background-color: #d9d9d9;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+select {
+  font-family: "Work Sans", sans-serif;
+  border: none;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+i {
+  font-size: 1.5rem;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 0;
+  padding-top: 1rem;
+}
+
+p {
+  font-family: Roboto, sans-serif;
+}
