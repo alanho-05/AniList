@@ -52,6 +52,17 @@
   flex-basis: 0;
 }
 
+.test {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 205px;
+}
+
+.margin-top-remove {
+  margin-top: -10px;
+}
+
 .col-full,
 .col-half,
 .col-third {
@@ -70,6 +81,10 @@
 
   .contain {
     max-width: 400px;
+  }
+
+  .test {
+    min-width: 235px;
   }
 
   .col-full,
