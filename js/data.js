@@ -1,4 +1,4 @@
-/* exported data anime */
+/* exported data */
 
 const data = {
   view: 'anime-list',

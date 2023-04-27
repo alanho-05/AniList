@@ -1,7 +1,6 @@
-/* exported $ulChild $playConfirm  $bookmarkConfirm */
+/* exported $playConfirm  $bookmarkConfirm */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
-const $ulChild = $ulList.childNodes;
 const $seasonHeader = document.querySelector('#season');
 const $yearHeader = document.querySelector('#year');
 const $seasonSelect = document.querySelector('#season-select');
@@ -193,7 +192,7 @@ function renderAnime(entry) {
   imgEl.setAttribute('src', entry.images.jpg.image_url);
 
   const colDiv = document.createElement('div');
-  colDiv.setAttribute('class', 'col-entry test');
+  colDiv.setAttribute('class', 'col-entry entry-contain');
 
   const titleDiv = document.createElement('div');
   titleDiv.setAttribute('class', 'title margin-top-remove');
