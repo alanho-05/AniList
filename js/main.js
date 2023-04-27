@@ -2,6 +2,8 @@
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $ulChild = $ulList.childNodes;
+const $seasonHeader = document.querySelector('#season');
+const $yearHeader = document.querySelector('#year');
 const $seasonSelect = document.querySelector('#season-select');
 const $yearSelect = document.querySelector('#year-select');
 
@@ -127,11 +129,13 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 $seasonSelect.addEventListener('change', function () {
+  titleChange();
   deleteDOM();
   animeSwap($yearSelect.value, $seasonSelect.value);
 });
 
 $yearSelect.addEventListener('change', function () {
+  titleChange();
   deleteDOM();
   animeSwap($yearSelect.value, $seasonSelect.value);
 });
@@ -154,6 +158,24 @@ function deleteDOM() {
   while ($ulList.firstChild) {
     $ulList.removeChild($ulList.firstChild);
   }
+}
+
+function titleChange() {
+  $seasonHeader.textContent = `${capitalize($seasonSelect.value)} `;
+  $yearHeader.textContent = `${$yearSelect.value} `;
+}
+
+function capitalize(word) {
+  let capped = '';
+  for (let i = 0; i < word.length; i++) {
+    if (i === 0) {
+      capped += word[i].toUpperCase();
+    }
+    if (i !== 0) {
+      capped += word[i].toLowerCase();
+    }
+  }
+  return capped;
 }
 
 function renderAnime(entry) {
