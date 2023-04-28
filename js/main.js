@@ -62,11 +62,16 @@ $ulList.addEventListener('click', function (event) {
   if (event.target.classList.contains('info')) {
     for (let i = 0; i < data.list.length; i++) {
       if (data.list[i].mal_id === Number($animeLi.dataset.malId)) {
-        infoImg.setAttribute('src', data.list[i].images.jpg.image_url);
-
+        let title = '';
         if (data.list[i].title_english === null) {
-          infoTitle.textContent = data.list[i].title;
-        } else infoTitle.textContent = data.list[i].title_english;
+          title = data.list[i].title;
+        } else {
+          title = data.list[i].title_english;
+        }
+
+        infoImg.setAttribute('src', data.list[i].images.jpg.image_url);
+        infoImg.setAttribute('alt', `${title}.img`);
+        infoTitle.textContent = title;
 
         synopsis.textContent = data.list[i].synopsis;
       }
@@ -115,17 +120,23 @@ $bookmarkExit.addEventListener('click', function (event) {
 
 const $entryList = document.querySelector('#entry-list');
 
-const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now?page=1');
-xhr.responseType = 'json';
-xhr.addEventListener('load', function () {
-  data.list = xhr.response.data;
-  for (let i = 0; i < xhr.response.data.length; i++) {
-    const animeEntry = renderAnime(xhr.response.data[i]);
-    $entryList.appendChild(animeEntry);
-  }
+function currentAnime() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now?page=1');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    data.list = xhr.response.data;
+    for (let i = 0; i < xhr.response.data.length; i++) {
+      const animeEntry = renderAnime(xhr.response.data[i]);
+      $entryList.appendChild(animeEntry);
+    }
+  });
+  xhr.send();
+}
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  currentAnime();
 });
-xhr.send();
 
 $seasonSelect.addEventListener('change', function () {
   titleChange();
@@ -178,6 +189,13 @@ function capitalize(word) {
 }
 
 function renderAnime(entry) {
+  let title = '';
+  if (entry.title_english === null) {
+    title = entry.title;
+  } else {
+    title = entry.title_english;
+  }
+
   const listEl = document.createElement('li');
   listEl.setAttribute('data-mal-id', entry.mal_id);
 
@@ -190,6 +208,7 @@ function renderAnime(entry) {
   const imgEl = document.createElement('img');
   imgEl.setAttribute('class', 'entry-img');
   imgEl.setAttribute('src', entry.images.jpg.image_url);
+  imgEl.setAttribute('alt', `${title}.img`);
 
   const colDiv = document.createElement('div');
   colDiv.setAttribute('class', 'col-entry entry-contain');
@@ -199,9 +218,7 @@ function renderAnime(entry) {
 
   const titleTxt = document.createElement('h4');
   titleTxt.setAttribute('class', 'white-font');
-  if (entry.title_english === null) {
-    titleTxt.textContent = entry.title;
-  } else titleTxt.textContent = entry.title_english;
+  titleTxt.textContent = title;
 
   const buttonDiv = document.createElement('div');
   buttonDiv.setAttribute('class', 'buttons');
