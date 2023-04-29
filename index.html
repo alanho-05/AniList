@@ -3,17 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
+  <title>AniList</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Work+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <header>
+  <header class="nav-bg">
+    <div class="container">
+      <div class="row-nav">
+        <div class="col-full">
+          <h1 class="white-font">AniList</h1>
+          <label>
+            <select name="season" id="season-select" class="white-font nav-bg margin-left">
+              <option id="winter" value="winter">Winter</option>
+              <option id="spring" value="spring">Spring</option>
+              <option id="summer" value="summer">Summer</option>
+              <option id="fall" value="fall">Fall</option>
+            </select>
+          </label>
+          <label>
+            <select name="year" id="year-select" class="white-font nav-bg margin-left">
+            </select>
+          </label>
+          <i id="bookmark-icon" class="fa-solid fa-bookmark align-right white-font"></i>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="grey-bg">
+    <div class="container">
+      <div class="row-body">
+        <div class="col-full">
+          <h2 class="no-margin-top"><span id="season">Spring </span><span id="year">2023 </span>Anime</h2>
+        </div>
+      </div>
+      <div data-view="anime-list">
+        <div class="row-body">
+          <ul id="entry-list">
+          </ul>
+        </div>
+      </div>
+    </div>
   </main>
+  <div id="info-modal" class=" fixed overlay hidden">
+    <div class="flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <i class="fa-solid fa-square-xmark align-right info-exit"></i>
+          <div class="modal-row">
+            <div class="col-img">
+              <img id="info-img" class="entry-img" src="" alt="">
+            </div>
+            <h3 id="info-title" class="no-margin-top"></h3>
+          </div>
+          <div class="modal-row overflow-text">
+            <p>Synopsis:<br>
+              <span id="synopsis"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="play-modal" class="centered fixed overlay hidden">
+    <div class="container flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <div class="modal-row">
+            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+          </div>
+          <div class="modal-row">
+            <p class="no-margin-top">Link to YouTube trailer?</p>
+          </div>
+          <div class="modal-buttons">
+            <i class="fa-solid fa-square-check play-confirm"></i>
+            <i class="fa-solid fa-square-xmark play-exit"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="bookmark-modal" class="centered fixed overlay hidden">
+    <div class="container flex-centered">
+      <div class="modal-layout">
+        <div class="contain">
+          <div class="modal-row">
+            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+          </div>
+          <div class="modal-row">
+            <p class="no-margin-top">Bookmark this anime?</p>
+          </div>
+          <div class="modal-buttons">
+            <i class="fa-solid fa-square-check bookmark-confirm"></i>
+            <i class="fa-solid fa-square-xmark bookmark-exit"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
