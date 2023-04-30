@@ -77,6 +77,11 @@ iframe {
   height: 169px;
 }
 
+.overflow-text {
+  overflow: auto;
+  max-height: 350px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 770px;
@@ -113,5 +118,15 @@ iframe {
   .trailer-contain {
     width: 600px;
     height: 338px;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .landscape {
+    max-height: 360px;
+  }
+
+  .overflow-text {
+    max-height: 150px;
   }
 }
