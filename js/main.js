@@ -1,4 +1,4 @@
-/* exported $playConfirm  $bookmarkConfirm */
+/* exported  $bookmarkConfirm */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -42,7 +42,6 @@ const $infoExit = document.querySelector('.info-exit');
 
 let togglePlayModal = false;
 const $playModal = document.querySelector('#play-modal');
-const $playConfirm = document.querySelector('.play-confirm');
 const $playExit = document.querySelector('.play-exit');
 
 let toggleBookmarkModal = false;
