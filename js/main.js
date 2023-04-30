@@ -5,6 +5,7 @@ const $seasonHeader = document.querySelector('#season');
 const $yearHeader = document.querySelector('#year');
 const $seasonSelect = document.querySelector('#season-select');
 const $yearSelect = document.querySelector('#year-select');
+const $trailer = document.querySelector('#trailer');
 
 const currentYear = new Date().getFullYear();
 
@@ -76,13 +77,30 @@ $ulList.addEventListener('click', function (event) {
         synopsis.textContent = data.list[i].synopsis;
       }
     }
+
     toggleInfoModal = !toggleInfoModal;
     if (toggleInfoModal === true) {
       $infoModal.classList.remove('hidden');
     }
   }
 
+  const playTitle = document.querySelector('#play-title');
+
   if (event.target.classList.contains('play')) {
+    for (let i = 0; i < data.list.length; i++) {
+      if (data.list[i].mal_id === Number($animeLi.dataset.malId)) {
+        let title = '';
+        if (data.list[i].title_english === null) {
+          title = data.list[i].title;
+        } else {
+          title = data.list[i].title_english;
+        }
+
+        playTitle.textContent = title;
+        $trailer.setAttribute('src', data.list[i].trailer.embed_url);
+      }
+    }
+
     togglePlayModal = !togglePlayModal;
     if (togglePlayModal === true) {
       $playModal.classList.remove('hidden');
@@ -108,6 +126,7 @@ $playExit.addEventListener('click', function (event) {
   togglePlayModal = !togglePlayModal;
   if (togglePlayModal === false) {
     $playModal.classList.add('hidden');
+    $trailer.setAttribute('src', '');
   }
 });
 

@@ -74,19 +74,18 @@
       </div>
     </div>
   </div>
-  <div id="play-modal" class="centered fixed overlay hidden">
-    <div class="container flex-centered">
+  <div id="play-modal" class=" fixed overlay hidden">
+    <div class="flex-centered">
       <div class="modal-layout">
         <div class="contain">
+          <i class="fa-solid fa-square-xmark align-right play-exit"></i>
           <div class="modal-row">
-            <h3 class="no-margin-top">KonoSuba: An Explosion on This Wonderful World!</h3>
+            <h3 id="play-title" class="align-left no-margin-top"></h3>
           </div>
-          <div class="modal-row">
-            <p class="no-margin-top">Link to YouTube trailer?</p>
-          </div>
-          <div class="modal-buttons">
-            <i class="fa-solid fa-square-check play-confirm"></i>
-            <i class="fa-solid fa-square-xmark play-exit"></i>
+          <div class="trailer-contain">
+            <iframe id="trailer" src="" title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+              allowfullscreen></iframe>
           </div>
         </div>
       </div>
