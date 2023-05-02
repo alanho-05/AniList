@@ -1,4 +1,4 @@
-/* exported  $bookmarkConfirm renderBookmark */
+/* exported  $bookmarkConfirm toggleNoEntries */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -6,6 +6,7 @@ const $yearHeader = document.querySelector('#year');
 const $seasonSelect = document.querySelector('#season-select');
 const $yearSelect = document.querySelector('#year-select');
 const $trailer = document.querySelector('#trailer');
+const $bookmarkMessage = document.querySelector('#bookmark-message');
 
 const currentYear = new Date().getFullYear();
 
@@ -361,3 +362,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $bookmarkList.appendChild(bookmarkEntry);
   }
 });
+
+function toggleNoEntries() {
+  if (data.bookmark.length === 0) {
+    $bookmarkMessage.classList.remove('hidden');
+  } else {
+    $bookmarkMessage.classList.add('hidden');
+  }
+}
