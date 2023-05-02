@@ -352,3 +352,12 @@ function renderBookmark(entry) {
 
   return listEl;
 }
+
+const $bookmarkList = document.querySelector('#bookmark-list');
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (let i = 0; i < data.bookmark.length; i++) {
+    const bookmarkEntry = renderBookmark(data.bookmark[i]);
+    $bookmarkList.appendChild(bookmarkEntry);
+  }
+});
