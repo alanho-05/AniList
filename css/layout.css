@@ -21,11 +21,11 @@
   flex-direction: column;
 }
 
-.row-body {
+/* .row-body {
   display: flex;
-}
+} */
 
-#entry-list {
+.list-format {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -14,6 +14,10 @@
   margin-left: 1rem;
 }
 
+.margin-right {
+  margin-right: 1rem;
+}
+
 .white-font {
   color: white;
 }
@@ -25,6 +29,7 @@
 .grey-bg {
   min-height: 100vh;
   background-color: #d9d9d9;
+  margin-bottom: -1rem;
 }
 
 .entry-bg {
@@ -39,6 +44,10 @@
 #info-title {
   margin-right: auto;
   margin-left: 1rem;
+}
+
+.title {
+  max-height: 86.27px;
 }
 
 .embed-container {
@@ -97,6 +106,30 @@ h4 {
 
 span {
   white-space: pre-line;
+}
+
+progress {
+  accent-color: #f9d949;
+}
+
+.progress-div {
+  margin-top: auto;
+  margin-left: 1rem;
+}
+
+.progress-text {
+  margin-top: -5px;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+
+.progress-buttons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.progress-size {
+  font-size: 1.5rem;
 }
 
 /* Modal styles below */
