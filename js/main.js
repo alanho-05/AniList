@@ -1,4 +1,4 @@
-/* exported  $bookmarkConfirm */
+/* exported  $bookmarkConfirm renderBookmark */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -260,6 +260,95 @@ function renderAnime(entry) {
   buttonDiv.appendChild(infoButton);
   buttonDiv.appendChild(playButton);
   buttonDiv.appendChild(bookmarkButton);
+
+  return listEl;
+}
+
+function renderBookmark(entry) {
+  let title = '';
+  if (entry.title_english === null) {
+    title = entry.title;
+  } else {
+    title = entry.title_english;
+  }
+
+  const listEl = document.createElement('li');
+  listEl.setAttribute('data-mal-id', entry.mal_id);
+
+  const entryDiv = document.createElement('div');
+  entryDiv.setAttribute('class', 'row-entry');
+
+  const imgDiv = document.createElement('div');
+  imgDiv.setAttribute('class', 'col-img');
+
+  const imgEl = document.createElement('img');
+  imgEl.setAttribute('class', 'entry-img');
+  imgEl.setAttribute('src', entry.images.jpg.image_url);
+  imgEl.setAttribute('alt', `${title}.img`);
+
+  const colDiv = document.createElement('div');
+  colDiv.setAttribute('class', 'col-entry entry-contain');
+
+  const titleDiv = document.createElement('div');
+  titleDiv.setAttribute('class', 'title margin-top-remove');
+
+  const titleTxt = document.createElement('h4');
+  titleTxt.setAttribute('class', 'white-font');
+  titleTxt.textContent = title;
+
+  const progressDiv = document.createElement('div');
+  progressDiv.setAttribute('class', 'progress-div');
+
+  let totalEpisode = 0;
+  if (entry.episodes !== null) {
+    totalEpisode = entry.episodes;
+  }
+
+  const progressEl = document.createElement('progress');
+  progressEl.setAttribute('class', 'tracker');
+  progressEl.setAttribute('max', totalEpisode);
+  progressEl.setAttribute('min', '0');
+
+  const progressTxt = document.createElement('p');
+  progressTxt.setAttribute('class', 'progress-text white-font');
+
+  const spanEpisode = document.createElement('span');
+  spanEpisode.setAttribute('class', 'episode');
+
+  const spanDivider = document.createElement('span');
+  spanDivider.textContent = '/';
+
+  const spanTotal = document.createElement('span');
+  spanTotal.setAttribute('class', 'total');
+
+  const buttonDiv = document.createElement('div');
+  buttonDiv.setAttribute('class', 'progress-buttons');
+
+  const minusButton = document.createElement('i');
+  minusButton.setAttribute('class', 'fa-solid fa-square-minus margin-left progress-size');
+
+  const plusButton = document.createElement('i');
+  plusButton.setAttribute('class', 'fa-solid fa-square-plus margin-left progress-size');
+
+  const deleteButton = document.createElement('i');
+  deleteButton.setAttribute('class', 'fa-solid fa-trash progress-size align-right');
+
+  listEl.appendChild(entryDiv);
+  entryDiv.appendChild(imgDiv);
+  imgDiv.appendChild(imgEl);
+  entryDiv.appendChild(colDiv);
+  colDiv.appendChild(titleDiv);
+  titleDiv.appendChild(titleTxt);
+  colDiv.appendChild(progressDiv);
+  progressDiv.appendChild(progressEl);
+  progressDiv.appendChild(progressTxt);
+  progressTxt.appendChild(spanEpisode);
+  progressTxt.appendChild(spanDivider);
+  progressTxt.appendChild(spanTotal);
+  colDiv.appendChild(buttonDiv);
+  buttonDiv.appendChild(minusButton);
+  buttonDiv.appendChild(plusButton);
+  buttonDiv.appendChild(deleteButton);
 
   return listEl;
 }

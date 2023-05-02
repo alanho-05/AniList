@@ -21,10 +21,6 @@
   flex-direction: column;
 }
 
-/* .row-body {
-  display: flex;
-} */
-
 .list-format {
   display: flex;
   flex-wrap: wrap;
@@ -78,6 +74,11 @@ iframe {
   max-height: 350px;
 }
 
+progress {
+  accent-color: #f9d949;
+  min-width: 189px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 770px;
@@ -98,6 +99,11 @@ iframe {
   .trailer-contain {
     width: 500px;
     height: 282px;
+  }
+
+  progress {
+    accent-color: #f9d949;
+    min-width: 219px;
   }
 }
 

@@ -14,10 +14,6 @@
   margin-left: 1rem;
 }
 
-.margin-right {
-  margin-right: 1rem;
-}
-
 .white-font {
   color: white;
 }
@@ -106,10 +102,6 @@ h4 {
 
 span {
   white-space: pre-line;
-}
-
-progress {
-  accent-color: #f9d949;
 }
 
 .progress-div {

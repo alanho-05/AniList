@@ -3,7 +3,7 @@
 let data = {
   view: 'anime-list',
   list: [],
-  entries: [],
+  bookmark: [],
   editing: null,
   nextEntryId: 1
 };
