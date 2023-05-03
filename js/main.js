@@ -9,6 +9,10 @@ const $trailer = document.querySelector('#trailer');
 const $bookmarkMessage = document.querySelector('#bookmark-message');
 const $animeList = document.querySelector('#anime-list');
 const $bookmarkList = document.querySelector('#bookmark-list');
+const $bookmarkIcon = document.querySelector('#bookmark-icon');
+const $seasonYrHeader = document.querySelector('#season-yr-header');
+const $bookmarkHeader = document.querySelector('#bookmark-header');
+const $logo = document.querySelector('#logo');
 
 const currentYear = new Date().getFullYear();
 
@@ -376,9 +380,25 @@ function toggleNoEntries() {
 function viewSwap(view) {
   if (view === 'anime-list') {
     $animeList.classList.remove('hidden');
+    $seasonSelect.classList.remove('hidden');
+    $yearSelect.classList.remove('hidden');
+    $seasonYrHeader.classList.remove('hidden');
     $bookmarkList.classList.add('hidden');
+    $bookmarkHeader.classList.add('hidden');
   } else {
     $animeList.classList.add('hidden');
+    $seasonSelect.classList.add('hidden');
+    $yearSelect.classList.add('hidden');
+    $seasonYrHeader.classList.add('hidden');
     $bookmarkList.classList.remove('hidden');
+    $bookmarkHeader.classList.remove('hidden');
   }
 }
+
+$bookmarkIcon.addEventListener('click', function (event) {
+  viewSwap('bookmark-list');
+});
+
+$logo.addEventListener('click', function (event) {
+  viewSwap('anime-list');
+});

@@ -69,6 +69,10 @@ select:hover {
   cursor: pointer;
 }
 
+#logo:hover {
+  cursor: pointer;
+}
+
 i {
   font-size: 2rem;
 }
