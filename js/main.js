@@ -1,4 +1,4 @@
-/* exported  $bookmarkConfirm toggleNoEntries viewSwap */
+/* exported toggleNoEntries */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -113,7 +113,23 @@ $ulList.addEventListener('click', function (event) {
     }
   }
 
+  const $bmTitle = document.querySelector('#bm-title');
+
   if (event.target.classList.contains('bookmark')) {
+    for (let i = 0; i < data.list.length; i++) {
+      if (data.list[i].mal_id === Number($animeLi.dataset.malId)) {
+        let title = '';
+        if (data.list[i].title_english === null) {
+          title = data.list[i].title;
+        } else {
+          title = data.list[i].title_english;
+        }
+
+        $bmTitle.textContent = title;
+        data.temp = data.list[i];
+      }
+    }
+
     toggleBookmarkModal = !toggleBookmarkModal;
     if (toggleBookmarkModal === true) {
       $bookmarkModal.classList.remove('hidden');
@@ -136,12 +152,26 @@ $playExit.addEventListener('click', function (event) {
   }
 });
 
-$bookmarkExit.addEventListener('click', function (event) {
+$bookmarkConfirm.addEventListener('click', function (event) {
+  const duplicate = data.bookmark.includes(data.temp);
+
+  if (!duplicate) {
+    data.temp.currentEpisode = 0;
+    data.bookmark.push(data.temp);
+  }
+
+  bmModalClose();
+  viewSwap('bookmark-list');
+});
+
+$bookmarkExit.addEventListener('click', bmModalClose);
+
+function bmModalClose() {
   toggleBookmarkModal = !toggleBookmarkModal;
   if (toggleBookmarkModal === false) {
     $bookmarkModal.classList.add('hidden');
   }
-});
+}
 
 const $entryList = document.querySelector('#entry-list');
 
@@ -306,7 +336,7 @@ function renderBookmark(entry) {
   const progressDiv = document.createElement('div');
   progressDiv.setAttribute('class', 'progress-div');
 
-  let totalEpisode = 0;
+  let totalEpisode = 'Unknown';
   if (entry.episodes !== null) {
     totalEpisode = entry.episodes;
   }
@@ -314,19 +344,21 @@ function renderBookmark(entry) {
   const progressEl = document.createElement('progress');
   progressEl.setAttribute('class', 'tracker');
   progressEl.setAttribute('max', totalEpisode);
-  progressEl.setAttribute('min', '0');
+  progressEl.setAttribute('value', '0');
 
   const progressTxt = document.createElement('p');
   progressTxt.setAttribute('class', 'progress-text white-font');
 
   const spanEpisode = document.createElement('span');
   spanEpisode.setAttribute('class', 'episode');
+  spanEpisode.textContent = entry.currentEpisode;
 
   const spanDivider = document.createElement('span');
   spanDivider.textContent = '/';
 
   const spanTotal = document.createElement('span');
   spanTotal.setAttribute('class', 'total');
+  spanTotal.textContent = totalEpisode;
 
   const buttonDiv = document.createElement('div');
   buttonDiv.setAttribute('class', 'progress-buttons');
@@ -367,6 +399,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     const bookmarkEntry = renderBookmark(data.bookmark[i]);
     $bmList.appendChild(bookmarkEntry);
   }
+
+  toggleNoEntries();
 });
 
 function toggleNoEntries() {

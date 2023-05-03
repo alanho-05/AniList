@@ -4,7 +4,7 @@ let data = {
   view: 'anime-list',
   list: [],
   bookmark: [],
-  editing: null,
+  temp: {},
   nextEntryId: 1
 };
 
