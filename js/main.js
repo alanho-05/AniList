@@ -13,6 +13,7 @@ const $bookmarkIcon = document.querySelector('#bookmark-icon');
 const $seasonYrHeader = document.querySelector('#season-yr-header');
 const $bookmarkHeader = document.querySelector('#bookmark-header');
 const $logo = document.querySelector('#logo');
+const $bmList = document.querySelector('#bm-list');
 
 const currentYear = new Date().getFullYear();
 
@@ -126,6 +127,7 @@ $ulList.addEventListener('click', function (event) {
         }
 
         $bmTitle.textContent = title;
+        data.list[i].currentEpisode = 0;
         data.temp = data.list[i];
       }
     }
@@ -156,10 +158,11 @@ $bookmarkConfirm.addEventListener('click', function (event) {
   const duplicate = data.bookmark.includes(data.temp);
 
   if (!duplicate) {
-    data.temp.currentEpisode = 0;
     data.bookmark.push(data.temp);
+    $bmList.appendChild(renderBookmark(data.temp));
   }
 
+  toggleNoEntries();
   bmModalClose();
   viewSwap('bookmark-list');
 });
@@ -191,6 +194,13 @@ function currentAnime() {
 
 document.addEventListener('DOMContentLoaded', function (event) {
   currentAnime();
+
+  for (let i = 0; i < data.bookmark.length; i++) {
+    const bookmarkEntry = renderBookmark(data.bookmark[i]);
+    $bmList.appendChild(bookmarkEntry);
+  }
+
+  toggleNoEntries();
 });
 
 $seasonSelect.addEventListener('change', function () {
@@ -391,17 +401,6 @@ function renderBookmark(entry) {
 
   return listEl;
 }
-
-const $bmList = document.querySelector('#bm-list');
-
-document.addEventListener('DOMContentLoaded', function (event) {
-  for (let i = 0; i < data.bookmark.length; i++) {
-    const bookmarkEntry = renderBookmark(data.bookmark[i]);
-    $bmList.appendChild(bookmarkEntry);
-  }
-
-  toggleNoEntries();
-});
 
 function toggleNoEntries() {
   if (data.bookmark.length === 0) {
