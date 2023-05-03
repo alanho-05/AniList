@@ -1,4 +1,4 @@
-/* exported  $bookmarkConfirm toggleNoEntries */
+/* exported  $bookmarkConfirm toggleNoEntries viewSwap */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -7,6 +7,8 @@ const $seasonSelect = document.querySelector('#season-select');
 const $yearSelect = document.querySelector('#year-select');
 const $trailer = document.querySelector('#trailer');
 const $bookmarkMessage = document.querySelector('#bookmark-message');
+const $animeList = document.querySelector('#anime-list');
+const $bookmarkList = document.querySelector('#bookmark-list');
 
 const currentYear = new Date().getFullYear();
 
@@ -354,12 +356,12 @@ function renderBookmark(entry) {
   return listEl;
 }
 
-const $bookmarkList = document.querySelector('#bookmark-list');
+const $bmList = document.querySelector('#bm-list');
 
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.bookmark.length; i++) {
     const bookmarkEntry = renderBookmark(data.bookmark[i]);
-    $bookmarkList.appendChild(bookmarkEntry);
+    $bmList.appendChild(bookmarkEntry);
   }
 });
 
@@ -368,5 +370,15 @@ function toggleNoEntries() {
     $bookmarkMessage.classList.remove('hidden');
   } else {
     $bookmarkMessage.classList.add('hidden');
+  }
+}
+
+function viewSwap(view) {
+  if (view === 'anime-list') {
+    $animeList.classList.remove('hidden');
+    $bookmarkList.classList.add('hidden');
+  } else {
+    $animeList.classList.add('hidden');
+    $bookmarkList.classList.remove('hidden');
   }
 }
