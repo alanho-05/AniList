@@ -1,4 +1,3 @@
-/* exported toggleNoEntries */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');

@@ -21,10 +21,23 @@
   flex-direction: column;
 }
 
+.bm-contain {
+  max-width: 300px;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bm-modal-layout {
+  background-color: #d9d9d9;
+  padding: 2rem;
+  min-width: 364px;
+  min-height: 252px;
+}
+
 .list-format {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin-top: 0;
 }
 
@@ -102,7 +115,6 @@ progress {
   }
 
   progress {
-    accent-color: #f9d949;
     min-width: 219px;
   }
 }
