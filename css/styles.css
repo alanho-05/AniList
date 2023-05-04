@@ -25,6 +25,7 @@
 .grey-bg {
   min-height: 100vh;
   background-color: #d9d9d9;
+  margin-bottom: -1rem;
 }
 
 .entry-bg {
@@ -41,13 +42,24 @@
   margin-left: 1rem;
 }
 
+#bookmark-message {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.title {
+  max-height: 1rem;
+
+  /* max-height: 86.27px; */
+}
+
 .embed-container {
   width: 318px;
   height: 179px;
 }
 
 li {
-  margin-bottom: 1rem;
+  margin: 0.25rem;
 }
 
 select {
@@ -56,6 +68,10 @@ select {
 }
 
 select:hover {
+  cursor: pointer;
+}
+
+#logo:hover {
   cursor: pointer;
 }
 
@@ -99,7 +115,24 @@ span {
   white-space: pre-line;
 }
 
-/* Modal styles below */
+.progress-div {
+  margin-top: auto;
+  margin-left: 1rem;
+}
+
+.progress-text {
+  margin-top: -5px;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}
+
+.progress-buttons {
+  display: flex;
+}
+
+.progress-size {
+  font-size: 1.5rem;
+}
 
 .modal-row {
   display: flex;
@@ -143,6 +176,8 @@ span {
 .modal-buttons {
   display: flex;
   justify-content: space-around;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
 }
 
 .modal-buttons > i {

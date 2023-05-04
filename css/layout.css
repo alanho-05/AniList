@@ -21,14 +21,21 @@
   flex-direction: column;
 }
 
-.row-body {
+.bm-contain {
+  width: 300px;
+  min-height: 190px;
   display: flex;
+  flex-direction: column;
 }
 
-#entry-list {
+.bm-modal-layout {
+  background-color: #d9d9d9;
+  padding: 2rem;
+}
+
+.list-format {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin-top: 0;
 }
 
@@ -76,6 +83,11 @@ iframe {
 .overflow-text {
   overflow: auto;
   max-height: 350px;
+}
+
+progress {
+  accent-color: #f9d949;
+  min-width: 100%;
 }
 
 @media screen and (min-width: 768px) {
