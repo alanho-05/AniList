@@ -1,3 +1,4 @@
+/* exported $deleteConfirm */
 const $yearDropdown = document.querySelector('#year-select');
 const $ulList = document.querySelector('ul');
 const $seasonHeader = document.querySelector('#season');
@@ -56,6 +57,11 @@ let toggleBookmarkModal = false;
 const $bookmarkModal = document.querySelector('#bookmark-modal');
 const $bookmarkConfirm = document.querySelector('.bookmark-confirm');
 const $bookmarkExit = document.querySelector('.bookmark-exit');
+
+let toggleDeleteModal = false;
+const $deleteModal = document.querySelector('#delete-modal');
+const $deleteConfirm = document.querySelector('.delete-confirm');
+const $deleteExit = document.querySelector('.delete-exit');
 
 $ulList.addEventListener('click', function (event) {
   if (event.target.tagName !== 'I') {
@@ -483,6 +489,20 @@ $bmList.addEventListener('click', function (event) {
       increase($targetEpisode, liId);
       progressUpdate($targetEpisode, $progressBar);
     }
+  }
+
+  if (event.target.classList.contains('fa-trash')) {
+    toggleDeleteModal = !toggleDeleteModal;
+    if (toggleDeleteModal) {
+      $deleteModal.classList.remove('hidden');
+    }
+  }
+});
+
+$deleteExit.addEventListener('click', function (event) {
+  toggleDeleteModal = !toggleDeleteModal;
+  if (!toggleDeleteModal) {
+    $deleteModal.classList.add('hidden');
   }
 });
 
