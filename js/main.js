@@ -155,7 +155,12 @@ $playExit.addEventListener('click', function (event) {
 });
 
 $bookmarkConfirm.addEventListener('click', function (event) {
-  const duplicate = data.bookmark.includes(data.temp);
+  let duplicate = false;
+  for (let i = 0; i < data.bookmark.length; i++) {
+    if (data.bookmark[i].mal_id === data.temp.mal_id) {
+      duplicate = true;
+    }
+  }
 
   if (!duplicate) {
     data.bookmark.push(data.temp);
