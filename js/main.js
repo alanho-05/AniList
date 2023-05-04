@@ -460,6 +460,7 @@ $bmList.addEventListener('click', function (event) {
       $target = $ulNode[1].children[i];
     }
   }
+
   const $targetEpisode = $target.querySelector('.episode');
   const episodeNum = Number($targetEpisode.textContent);
   const $targetTotal = $target.querySelector('.total').textContent;
@@ -467,7 +468,9 @@ $bmList.addEventListener('click', function (event) {
   const $progressBar = $target.querySelector('progress');
 
   if (event.target.classList.contains('fa-square-minus')) {
-    if (episodeNum > 0) {
+    if ($targetTotal === 'Unknown' && episodeNum > 0) {
+      decrease($targetEpisode, liId);
+    } else if (episodeNum > 0) {
       decrease($targetEpisode, liId);
       progressUpdate($targetEpisode, $progressBar);
     }
