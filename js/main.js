@@ -11,6 +11,7 @@ const $bookmarkList = document.querySelector('#bookmark-list');
 const $bookmarkIcon = document.querySelector('#bookmark-icon');
 const $seasonYrHeader = document.querySelector('#season-yr-header');
 const $bookmarkHeader = document.querySelector('#bookmark-header');
+const $delTitle = document.querySelector('#del-title');
 const $logo = document.querySelector('#logo');
 const $bmList = document.querySelector('#bm-list');
 const $ulNode = document.querySelectorAll('ul');
@@ -56,6 +57,11 @@ let toggleBookmarkModal = false;
 const $bookmarkModal = document.querySelector('#bookmark-modal');
 const $bookmarkConfirm = document.querySelector('.bookmark-confirm');
 const $bookmarkExit = document.querySelector('.bookmark-exit');
+
+let toggleDeleteModal = false;
+const $deleteModal = document.querySelector('#delete-modal');
+const $deleteConfirm = document.querySelector('.delete-confirm');
+const $deleteExit = document.querySelector('.delete-exit');
 
 $ulList.addEventListener('click', function (event) {
   if (event.target.tagName !== 'I') {
@@ -466,6 +472,7 @@ $bmList.addEventListener('click', function (event) {
   const $targetTotal = $target.querySelector('.total').textContent;
   const totalNum = Number($targetTotal);
   const $progressBar = $target.querySelector('progress');
+  const $targetTitle = $target.querySelector('h4').textContent;
 
   if (event.target.classList.contains('fa-square-minus')) {
     if ($targetTotal === 'Unknown' && episodeNum > 0) {
@@ -483,6 +490,44 @@ $bmList.addEventListener('click', function (event) {
       increase($targetEpisode, liId);
       progressUpdate($targetEpisode, $progressBar);
     }
+  }
+
+  if (event.target.classList.contains('fa-trash')) {
+    $delTitle.textContent = $targetTitle;
+    data.temp = liId;
+
+    toggleDeleteModal = !toggleDeleteModal;
+    if (toggleDeleteModal) {
+      $deleteModal.classList.remove('hidden');
+    }
+  }
+});
+
+$deleteExit.addEventListener('click', function (event) {
+  toggleDeleteModal = !toggleDeleteModal;
+  if (!toggleDeleteModal) {
+    $deleteModal.classList.add('hidden');
+  }
+});
+
+$deleteConfirm.addEventListener('click', function (event) {
+  for (let i = 0; i < data.bookmark.length; i++) {
+    if (data.bookmark[i].mal_id === Number(data.temp)) {
+      data.bookmark.splice(i, 1);
+    }
+  }
+
+  for (let i = 0; i < $ulNode[1].children.length; i++) {
+    if ($ulNode[1].children[i].dataset.malId === data.temp) {
+      $ulNode[1].children[i].remove();
+    }
+  }
+
+  toggleNoEntries();
+
+  toggleDeleteModal = !toggleDeleteModal;
+  if (!toggleDeleteModal) {
+    $deleteModal.classList.add('hidden');
   }
 });
 
