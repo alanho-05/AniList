@@ -10,7 +10,7 @@ let data = {
 
 const previousEntryJSON = localStorage.getItem('watchlist-local-storage');
 
-window.addEventListener('beforeunload', function (event) {
+window.addEventListener('unload', function (event) {
   const entryJSON = JSON.stringify(data);
   localStorage.setItem('watchlist-local-storage', entryJSON);
 });
