@@ -13,6 +13,7 @@ const $seasonYrHeader = document.querySelector('#season-yr-header');
 const $bookmarkHeader = document.querySelector('#bookmark-header');
 const $logo = document.querySelector('#logo');
 const $bmList = document.querySelector('#bm-list');
+// const $ulNode = document.querySelectorAll('ul');
 
 const currentYear = new Date().getFullYear();
 
@@ -439,3 +440,22 @@ $bookmarkIcon.addEventListener('click', function (event) {
 $logo.addEventListener('click', function (event) {
   viewSwap('anime-list');
 });
+
+// $bmList.addEventListener('click', function (event) {
+//   if (event.target.tagName !== 'I') {
+//     return;
+//   }
+
+//   if (event.target.classList.contains('fa-square-minus')) {
+//   }
+
+//   if (event.target.classList.contains('fa-square-plus')) {
+//   }
+
+//   if (event.target.classList.contains('fa-trash')) {
+//   }
+// });
+
+// function decrease() {
+
+// }
