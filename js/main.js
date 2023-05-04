@@ -13,7 +13,7 @@ const $seasonYrHeader = document.querySelector('#season-yr-header');
 const $bookmarkHeader = document.querySelector('#bookmark-header');
 const $logo = document.querySelector('#logo');
 const $bmList = document.querySelector('#bm-list');
-// const $ulNode = document.querySelectorAll('ul');
+const $ulNode = document.querySelectorAll('ul');
 
 const currentYear = new Date().getFullYear();
 
@@ -356,10 +356,15 @@ function renderBookmark(entry) {
     totalEpisode = entry.episodes;
   }
 
+  let curentEpisode = 0;
+  if (totalEpisode !== 'Unknown' && entry.currentEpisode > 0) {
+    curentEpisode = entry.currentEpisode;
+  }
+
   const progressEl = document.createElement('progress');
   progressEl.setAttribute('class', 'tracker');
   progressEl.setAttribute('max', totalEpisode);
-  progressEl.setAttribute('value', '0');
+  progressEl.setAttribute('value', curentEpisode);
 
   const progressTxt = document.createElement('p');
   progressTxt.setAttribute('class', 'progress-text white-font');
@@ -441,21 +446,70 @@ $logo.addEventListener('click', function (event) {
   viewSwap('anime-list');
 });
 
-// $bmList.addEventListener('click', function (event) {
-//   if (event.target.tagName !== 'I') {
-//     return;
-//   }
+$bmList.addEventListener('click', function (event) {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
 
-//   if (event.target.classList.contains('fa-square-minus')) {
-//   }
+  const $animeLi = event.target.closest('li');
+  const liId = $animeLi.dataset.malId;
+  let $target;
 
-//   if (event.target.classList.contains('fa-square-plus')) {
-//   }
+  for (let i = 0; i < $ulNode[1].children.length; i++) {
+    if ($ulNode[1].children[i].dataset.malId === liId) {
+      $target = $ulNode[1].children[i];
+    }
+  }
+  const $targetEpisode = $target.querySelector('.episode');
+  const episodeNum = Number($targetEpisode.textContent);
+  const $targetTotal = $target.querySelector('.total').textContent;
+  const totalNum = Number($targetTotal);
+  const $progressBar = $target.querySelector('progress');
 
-//   if (event.target.classList.contains('fa-trash')) {
-//   }
-// });
+  if (event.target.classList.contains('fa-square-minus')) {
+    if (episodeNum > 0) {
+      decrease($targetEpisode, liId);
+      progressUpdate($targetEpisode, $progressBar);
+    }
+  }
 
-// function decrease() {
+  if (event.target.classList.contains('fa-square-plus')) {
+    if ($targetTotal === 'Unknown') {
+      increase($targetEpisode, liId);
+    } else if (episodeNum < totalNum) {
+      increase($targetEpisode, liId);
+      progressUpdate($targetEpisode, $progressBar);
+    }
+  }
+});
 
-// }
+function decrease(targetEpisode, id) {
+  let count = Number(targetEpisode.textContent);
+
+  count--;
+  targetEpisode.textContent = count;
+
+  for (let i = 0; i < data.bookmark.length; i++) {
+    if (data.bookmark[i].mal_id === Number(id)) {
+      data.bookmark[i].currentEpisode = count;
+    }
+  }
+}
+
+function increase(targetEpisode, id) {
+  let count = Number(targetEpisode.textContent);
+
+  count++;
+  targetEpisode.textContent = count;
+
+  for (let i = 0; i < data.bookmark.length; i++) {
+    if (data.bookmark[i].mal_id === Number(id)) {
+      data.bookmark[i].currentEpisode = count;
+    }
+  }
+}
+
+function progressUpdate(targetEpisode, progressBar) {
+  const count = Number(targetEpisode.textContent);
+  progressBar.setAttribute('value', count);
+}
