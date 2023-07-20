@@ -34,12 +34,16 @@ const summer = document.querySelector('#summer');
 const fall = document.querySelector('#fall');
 
 if (currentMonth < 3) {
+  $seasonHeader.textContent = 'Winter ';
   winter.setAttribute('selected', '');
 } else if (currentMonth < 6) {
+  $seasonHeader.textContent = 'Spring ';
   spring.setAttribute('selected', '');
 } else if (currentMonth < 9) {
+  $seasonHeader.textContent = 'Summer ';
   summer.setAttribute('selected', '');
 } else {
+  $seasonHeader.textContent = 'Fall ';
   fall.setAttribute('selected', '');
 }
 
