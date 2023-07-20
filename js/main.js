@@ -15,6 +15,7 @@ const $delTitle = document.querySelector('#del-title');
 const $logo = document.querySelector('#logo');
 const $bmList = document.querySelector('#bm-list');
 const $ulNode = document.querySelectorAll('ul');
+const $loadingPage = document.querySelector('#loading-page');
 
 const currentYear = new Date().getFullYear();
 
@@ -203,11 +204,13 @@ function currentAnime() {
       const animeEntry = renderAnime(xhr.response.data[i]);
       $entryList.appendChild(animeEntry);
     }
+    removeLoadingPage(800);
   });
   xhr.send();
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
+  addLoadingPage();
   currentAnime();
 
   for (let i = 0; i < data.bookmark.length; i++) {
@@ -219,12 +222,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 $seasonSelect.addEventListener('change', function () {
+  addLoadingPage();
   titleChange();
   deleteDOM();
   animeSwap($yearSelect.value, $seasonSelect.value);
 });
 
 $yearSelect.addEventListener('change', function () {
+  addLoadingPage();
   titleChange();
   deleteDOM();
   animeSwap($yearSelect.value, $seasonSelect.value);
@@ -240,8 +245,21 @@ function animeSwap(year, season) {
       const animeEntry = renderAnime(xhr.response.data[i]);
       $entryList.appendChild(animeEntry);
     }
+    removeLoadingPage(2500);
   });
   xhr.send();
+}
+
+function addLoadingPage() {
+  $animeList.classList.add('hidden');
+  $loadingPage.classList.remove('hidden');
+}
+
+function removeLoadingPage(delay) {
+  setTimeout(() => {
+    $loadingPage.classList.add('hidden');
+    $animeList.classList.remove('hidden');
+  }, delay);
 }
 
 function deleteDOM() {
