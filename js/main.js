@@ -4,7 +4,7 @@ const $seasonHeader = document.querySelector('#season');
 const $yearHeader = document.querySelector('#year');
 const $seasonSelect = document.querySelector('#season-select');
 const $yearSelect = document.querySelector('#year-select');
-const $trailer = document.querySelector('#trailer');
+const $youtubeTrailer = document.querySelector('.trailer-contain');
 const $bookmarkMessage = document.querySelector('#bookmark-message');
 const $animeList = document.querySelector('#anime-list');
 const $bookmarkList = document.querySelector('#bookmark-list');
@@ -107,15 +107,28 @@ $ulList.addEventListener('click', function (event) {
   if (event.target.classList.contains('play')) {
     for (let i = 0; i < data.list.length; i++) {
       if (data.list[i].mal_id === Number($animeLi.dataset.malId)) {
+        const anime = data.list[i];
         let title = '';
-        if (data.list[i].title_english === null) {
-          title = data.list[i].title;
+        let trailerContent;
+        if (anime.title_english === null) {
+          title = anime.title;
         } else {
-          title = data.list[i].title_english;
+          title = anime.title_english;
         }
 
         playTitle.textContent = title;
-        $trailer.setAttribute('src', data.list[i].trailer.embed_url);
+        if (anime.trailer.embed_url === null) {
+          trailerContent = document.createElement('p');
+          trailerContent.textContent = 'Anime trailer not available';
+        } else {
+          trailerContent = document.createElement('iframe');
+          trailerContent.setAttribute('id', 'trailer');
+          trailerContent.setAttribute('src', anime.trailer.embed_url);
+          trailerContent.setAttribute('title', 'YouTube video player');
+          trailerContent.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope');
+          trailerContent.setAttribute('allowfullscreen', '');
+        }
+        $youtubeTrailer.appendChild(trailerContent);
       }
     }
 
@@ -161,7 +174,7 @@ $playExit.addEventListener('click', function (event) {
   togglePlayModal = !togglePlayModal;
   if (togglePlayModal === false) {
     $playModal.classList.add('hidden');
-    $trailer.setAttribute('src', '');
+    clearTrailer();
   }
 });
 
@@ -193,16 +206,21 @@ function bmModalClose() {
 }
 
 const $entryList = document.querySelector('#entry-list');
+const $pagination = document.querySelector('.pagination');
 
 function currentAnime() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now?page=1');
+  xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.list = xhr.response.data;
+    const responsePages = xhr.response.pagination;
     for (let i = 0; i < xhr.response.data.length; i++) {
       const animeEntry = renderAnime(xhr.response.data[i]);
       $entryList.appendChild(animeEntry);
+    }
+    for (let i = 1; i <= responsePages.last_visible_page; i++) {
+      paginationList(i, responsePages.current_page);
     }
     removeLoadingPage(800);
   });
@@ -225,27 +243,38 @@ $seasonSelect.addEventListener('change', function () {
   addLoadingPage();
   titleChange();
   deleteDOM();
-  animeSwap($yearSelect.value, $seasonSelect.value);
+  animeSwap($yearSelect.value, $seasonSelect.value, 1);
 });
 
 $yearSelect.addEventListener('change', function () {
   addLoadingPage();
   titleChange();
   deleteDOM();
-  animeSwap($yearSelect.value, $seasonSelect.value);
+  animeSwap($yearSelect.value, $seasonSelect.value, 1);
 });
 
-function animeSwap(year, season) {
+$pagination.addEventListener('click', function () {
+  const pageNum = event.target.textContent;
+  addLoadingPage();
+  deleteDOM();
+  animeSwap($yearSelect.value, $seasonSelect.value, pageNum);
+});
+
+function animeSwap(year, season, pageNum) {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://api.jikan.moe/v4/seasons/${year}/${season}`);
+  xhr.open('GET', `https://api.jikan.moe/v4/seasons/${year}/${season}?page=${pageNum}`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.list = xhr.response.data;
+    const responsePages = xhr.response.pagination;
     for (let i = 0; i < xhr.response.data.length; i++) {
       const animeEntry = renderAnime(xhr.response.data[i]);
       $entryList.appendChild(animeEntry);
     }
-    removeLoadingPage(2500);
+    for (let i = 1; i <= responsePages.last_visible_page; i++) {
+      paginationList(i, responsePages.current_page);
+    }
+    removeLoadingPage(1500);
   });
   xhr.send();
 }
@@ -265,6 +294,15 @@ function removeLoadingPage(delay) {
 function deleteDOM() {
   while ($ulList.firstChild) {
     $ulList.removeChild($ulList.firstChild);
+  }
+  while ($pagination.firstChild) {
+    $pagination.removeChild($pagination.firstChild);
+  }
+}
+
+function clearTrailer() {
+  while ($youtubeTrailer.firstChild) {
+    $youtubeTrailer.removeChild($youtubeTrailer.firstChild);
   }
 }
 
@@ -438,6 +476,17 @@ function renderBookmark(entry) {
   buttonDiv.appendChild(deleteButton);
 
   return listEl;
+}
+
+function paginationList(pageNum, currentPage) {
+  const pageButton = document.createElement('a');
+  pageButton.setAttribute('href', '#');
+  pageButton.textContent = pageNum;
+  if (pageNum === currentPage) {
+    pageButton.classList.add('active');
+  }
+
+  $pagination.appendChild(pageButton);
 }
 
 function toggleNoEntries() {

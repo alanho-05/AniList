@@ -24,8 +24,6 @@
 
 .grey-bg {
   min-height: 100vh;
-  background-color: #d9d9d9;
-  margin-bottom: -1rem;
 }
 
 .entry-bg {
@@ -181,4 +179,29 @@ span {
 
 .modal-buttons > i {
   font-size: 2.5rem;
+}
+
+/* Pagination style */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem;
+}
+
+.pagination a {
+  color: black;
+  font-size: 1.1rem;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #3f72af;
+  border-radius: 50%;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 50%;
 }
