@@ -35,17 +35,17 @@ const summer = document.querySelector('#summer');
 const fall = document.querySelector('#fall');
 
 if (currentMonth < 3) {
-  $seasonHeader.textContent = 'Winter ';
   winter.setAttribute('selected', '');
+  $seasonHeader.textContent = 'Winter ';
 } else if (currentMonth < 6) {
-  $seasonHeader.textContent = 'Spring ';
   spring.setAttribute('selected', '');
+  $seasonHeader.textContent = 'Spring ';
 } else if (currentMonth < 9) {
-  $seasonHeader.textContent = 'Summer ';
   summer.setAttribute('selected', '');
+  $seasonHeader.textContent = 'Summer ';
 } else {
-  $seasonHeader.textContent = 'Fall ';
   fall.setAttribute('selected', '');
+  $seasonHeader.textContent = 'Fall ';
 }
 
 // Selects current season based on the current month.
@@ -210,7 +210,7 @@ const $pagination = document.querySelector('.pagination');
 
 function currentAnime() {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now');
+  xhr.open('GET', 'https://api.jikan.moe/v4/seasons/now?sfw=true');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.list = xhr.response.data;
@@ -262,7 +262,7 @@ $pagination.addEventListener('click', function () {
 
 function animeSwap(year, season, pageNum) {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://api.jikan.moe/v4/seasons/${year}/${season}?page=${pageNum}`);
+  xhr.open('GET', `https://api.jikan.moe/v4/seasons/${year}/${season}?page=${pageNum}&sfw=true`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     data.list = xhr.response.data;
